@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MITRE ATT&CK Mobile: MDM vs MTD</title>
+  <title>MITRE Mapping: MDM vs MTD</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -11,8 +11,6 @@
       --mtd: #00d084;
       --both: #9b59b6;
       --none: #e74c3c;
-      --text-light: #ffffff;
-      --text-dark: #222831;
       --accent: #00d084;
     }
 
@@ -25,15 +23,14 @@
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #3a0ca3, #4361ee);
-      color: var(--text-light);
-      min-height: 100vh;
-      padding: 2rem 1rem 5rem;
+      color: #ffffff;
+      padding: 2rem 1rem 6rem;
       transition: background 0.3s ease, color 0.3s ease;
     }
 
     body.dark-mode {
       background: linear-gradient(135deg, #0b0c2a, #1e1e3f);
-      color: var(--text-light);
+      color: #ffffff;
     }
 
     header {
@@ -46,49 +43,32 @@
       margin-bottom: 0.5rem;
     }
 
-    header p {
-      font-size: 1rem;
-      color: #c4d1ff;
-    }
-
-    .grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      justify-content: center;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.05);
+    .tactic {
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(8px);
       border-radius: 12px;
-      padding: 1.5rem;
-      width: 100%;
-      max-width: 300px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 1rem;
+      padding: 1rem 1.5rem;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    .tactic h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
     }
 
-    .card h3 {
-      margin-bottom: 0.75rem;
-      font-size: 1.25rem;
+    .technique {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .tag {
       display: inline-block;
-      padding: 6px 12px;
+      padding: 5px 10px;
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 600;
-      margin-right: 6px;
-      margin-top: 6px;
+      margin-left: 10px;
       color: white;
     }
 
@@ -97,16 +77,12 @@
     .both { background: var(--both); }
     .none { background: var(--none); }
 
-    .tag-container {
-      margin-top: 0.5rem;
-    }
-
     .dark-toggle {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: #000;
-      color: #fff;
+      background-color: black;
+      color: white;
       border: none;
       padding: 10px 16px;
       border-radius: 6px;
@@ -114,33 +90,6 @@
       z-index: 999;
     }
 
-    .back-link {
-      display: block;
-      text-align: center;
-      margin: 2rem auto 1rem;
-      text-decoration: none;
-      background: var(--accent);
-      padding: 12px 24px;
-      color: white;
-      border-radius: 6px;
-      font-weight: 600;
-      max-width: 280px;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      color: #ccc;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 600px) {
-      .card {
-        max-width: 100%;
-      }
-    }
-
-    /* Lead Gen Form */
     .cta-section {
       display: flex;
       justify-content: center;
@@ -212,129 +161,109 @@
       font-size: 0.8rem;
       color: #ccc;
     }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>MITRE ATT&CK Mobile: MDM vs MTD</h1>
-    <p>Visual comparison of mobile defense coverage by tactic</p>
+    <h1>MITRE ATT&CK Mobile Mapping</h1>
+    <p>See how MDM and Zimperium MTD cover MITRE mobile techniques</p>
   </header>
 
-  <div class="grid">
+  <main style="max-width: 900px; margin: 0 auto;">
 
-    <div class="card">
-      <h3>Initial Access</h3>
-      <p>Phishing, malicious app installs, sideloading</p>
-      <div class="tag-container">
-        <span class="tag none">MDM: ❌</span>
-        <span class="tag mtd">MTD: ✅</span>
+    <div class="tactic">
+      <h2>📥 Initial Access</h2>
+      <div class="technique">Drive-By Compromise <span class="tag mtd">MTD</span></div>
+      <div class="technique">Exploit Public-Facing Application <span class="tag mtd">MTD</span></div>
+      <div class="technique">User Execution via Social Engineering <span class="tag mtd">MTD</span></div>
+      <div class="technique">Sideloading <span class="tag both">Both</span></div>
+    </div>
+
+    <div class="tactic">
+      <h2>⚙️ Execution</h2>
+      <div class="technique">Native Code <span class="tag mtd">MTD</span></div>
+      <div class="technique">JavaScript <span class="tag none">None</span></div>
+    </div>
+
+    <div class="tactic">
+      <h2>📌 Persistence</h2>
+      <div class="technique">Accessibility Settings Modification <span class="tag mtd">MTD</span></div>
+      <div class="technique">Application AutoStart <span class="tag mtd">MTD</span></div>
+    </div>
+
+    <div class="tactic">
+      <h2>🛠️ Privilege Escalation</h2>
+      <div class="technique">Exploitation for Privilege Escalation <span class="tag mtd">MTD</span></div>
+      <div class="technique">Device Admin Abuse <span class="tag mdm">MDM</span></div>
+      <div class="technique">Process Injection <span class="tag none">None</span></div>
+    </div>
+
+    <div class="tactic">
+      <h2>🎭 Defense Evasion</h2>
+      <div class="technique">Obfuscated Files or Information <span class="tag mtd">MTD</span></div>
+      <div class="technique">Uninstall Security Software <span class="tag mtd">MTD</span></div>
+    </div>
+
+    <div class="tactic">
+      <h2>🔐 Credential Access</h2>
+      <div class="technique">Credential Dumping <span class="tag mtd">MTD</span></div>
+      <div class="technique">Keylogging <span class="tag mtd">MTD</span></div>
+    </div>
+
+    <div class="tactic">
+      <h2>🔎 Discovery</h2>
+      <div class="technique">Application Discovery <span class="tag both">Both</span></div>
+      <div class="technique">System Information Discovery <span class="tag both">Both</span></div>
+      <div class="technique">Network Service Scanning <span class="tag mtd">MTD</span></div>
+    </div>
+
+    <div class="tactic">
+      <h2>📸 Collection</h2>
+      <div class="technique">Audio Capture <span class="tag mtd">MTD</span></div>
+      <div class="technique">Screen Capture <span class="tag mtd">MTD</span></div>
+      <div class="technique">Location Tracking <span class="tag both">Both</span></div>
+    </div>
+
+    <div class="tactic">
+      <h2>📤 Exfiltration</h2>
+      <div class="technique">Exfiltration Over C2 Channel <span class="tag mtd">MTD</span></div>
+      <div class="technique">Exfiltration Over Physical Medium <span class="tag none">None</span></div>
+    </div>
+
+    <div class="tactic">
+      <h2>📡 Command & Control</h2>
+      <div class="technique">Standard Application Layer Protocol <span class="tag mtd">MTD</span></div>
+      <div class="technique">Non-Standard Port <span class="tag mtd">MTD</span></div>
+      <div class="technique">Multistage Channels <span class="tag mtd">MTD</span></div>
+    </div>
+
+    <!-- Lead Gen -->
+    <section class="cta-section">
+      <div class="cta-card">
+        <h2>📩 Stay Ahead of Mobile Threats</h2>
+        <p>Get expert insights, security trends, and MTD strategies straight to your inbox.</p>
+        <form action="mailto:randy.mintz@zimperium.com" method="POST" enctype="text/plain">
+          <input type="email" name="email" placeholder="Your email address" required />
+          <button type="submit">Subscribe</button>
+        </form>
+        <small>We respect your privacy. No spam, ever.</small>
       </div>
-    </div>
+    </section>
 
-    <div class="card">
-      <h3>Execution</h3>
-      <p>Malicious code or behavior execution</p>
-      <div class="tag-container">
-        <span class="tag none">MDM: ❌</span>
-        <span class="tag mtd">MTD: ✅</span>
-      </div>
-    </div>
+    <footer>
+      Built with ❤️ by Randy & ChatGPT — Real MITRE Mapping Edition
+    </footer>
 
-    <div class="card">
-      <h3>Persistence</h3>
-      <p>Maintain presence across reboots or app restarts</p>
-      <div class="tag-container">
-        <span class="tag mdm">MDM: ⚠️</span>
-        <span class="tag mtd">MTD: ✅</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Privilege Escalation</h3>
-      <p>Rooting, jailbreaks, exploit escalation</p>
-      <div class="tag-container">
-        <span class="tag none">MDM: ❌</span>
-        <span class="tag mtd">MTD: ✅</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Defense Evasion</h3>
-      <p>Bypassing security tools, hiding presence</p>
-      <div class="tag-container">
-        <span class="tag none">MDM: ❌</span>
-        <span class="tag mtd">MTD: ✅</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Credential Access</h3>
-      <p>Keyloggers, clipboard monitors, phishing screens</p>
-      <div class="tag-container">
-        <span class="tag none">MDM: ❌</span>
-        <span class="tag mtd">MTD: ✅</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Discovery</h3>
-      <p>Gather info about device, apps, and network</p>
-      <div class="tag-container">
-        <span class="tag both">MDM: ✅</span>
-        <span class="tag both">MTD: ✅</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Collection</h3>
-      <p>Capture screenshots, audio, GPS, inputs</p>
-      <div class="tag-container">
-        <span class="tag none">MDM: ❌</span>
-        <span class="tag mtd">MTD: ✅</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Exfiltration</h3>
-      <p>Send stolen data out of the device</p>
-      <div class="tag-container">
-        <span class="tag none">MDM: ❌</span>
-        <span class="tag mtd">MTD: ✅</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Command & Control</h3>
-      <p>Remote server communication, C2 traffic</p>
-      <div class="tag-container">
-        <span class="tag none">MDM: ❌</span>
-        <span class="tag mtd">MTD: ✅</span>
-      </div>
-    </div>
-
-  </div>
-
-  <a class="back-link" href="index.html">← Back to OWASP Mobile Top 10</a>
-
-  <!-- Lead Gen Section -->
-  <section class="cta-section">
-    <div class="cta-card">
-      <h2>📩 Stay Ahead of Mobile Threats</h2>
-      <p>Get expert insights, security trends, and MTD strategies straight to your inbox.</p>
-      <form action="mailto:you@example.com" method="POST" enctype="text/plain">
-        <input type="email" name="email" placeholder="Your email address" required />
-        <button type="submit">Subscribe</button>
-      </form>
-      <small>We respect your privacy. No spam, ever.</small>
-    </div>
-  </section>
-
-  <footer>
-    Built with ❤️ by Randy & ChatGPT — Gradient Mode Activated
-  </footer>
-
-  <button class="dark-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+    <button class="dark-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+  </main>
 
   <script>
     function toggleDarkMode() {
