@@ -4,80 +4,197 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mobile Security & OWASP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fefefe;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem;
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    h1 {
-      font-size: 2rem;
+
+    /* Light Mode Styles */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f6f8fa;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #1e1e1e;
+      color: #f6f8fa;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .toggle-container {
+      display: flex;
+      justify-content: center;
       margin-bottom: 1rem;
     }
+
+    .toggle-btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .toggle-btn:hover {
+      background-color: #0056b3;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1rem;
-      max-width: 1000px;
-      width: 100%;
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
     }
+
     .card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 1rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease;
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
       cursor: pointer;
     }
+
     .card:hover {
-      transform: scale(1.03);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.1);
     }
+
     .card h3 {
-      margin-top: 0;
+      margin: 0;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
+
     .icon {
-      font-size: 1.8rem;
-      margin-right: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      padding: 5px;
+      border-radius: 6px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -100px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .faq-section {
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #ccc;
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 1rem;
+      font-size: 1.2rem;
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      padding: 0 1rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      padding: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 1rem;
+      color: #888;
     }
   </style>
 </head>
 <body>
 
-  <h1>🛡️ Mobile Security & OWASP</h1>
+  <header>
+    <h1>🛡️ Mobile Security & OWASP</h1>
+    <p>Top threats to mobile apps based on OWASP standards</p>
+  </header>
+
+  <div class="toggle-container">
+    <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  </div>
+
   <div class="grid">
-    <div class="card" onclick="alert('Improper Authentication: Risk of weak or missing authentication mechanisms.')">
+    <div class="card tooltip" onclick="alert('Improper Authentication: Weak or missing login logic.')">
       <h3><span class="icon">🔒</span>Improper Authentication</h3>
+      <span class="tooltiptext">Risk of weak or missing authentication mechanisms.</span>
     </div>
-    <div class="card" onclick="alert('Insecure Authorization: Poor enforcement of access control policies.')">
+    <div class="card tooltip" onclick="alert('Insecure Authorization: Poor enforcement of access control.')">
       <h3><span class="icon">🧑‍⚖️</span>Insecure Authorization</h3>
+      <span class="tooltiptext">Poor enforcement of access control policies.</span>
     </div>
-    <div class="card" onclick="alert('Insecure Communication: Data is not properly encrypted or secured during transmission.')">
+    <div class="card tooltip" onclick="alert('Insecure Communication: Unencrypted or poorly encrypted transmissions.')">
       <h3><span class="icon">📡</span>Insecure Communication</h3>
+      <span class="tooltiptext">Data is not properly encrypted during transmission.</span>
     </div>
-    <div class="card" onclick="alert('Inadequate Cryptography: Weak or misused cryptographic implementations.')">
+    <div class="card tooltip" onclick="alert('Inadequate Cryptography: Weak or outdated cryptographic methods.')">
       <h3><span class="icon">🔐</span>Inadequate Cryptography</h3>
+      <span class="tooltiptext">Use of weak or misused cryptographic implementations.</span>
     </div>
-    <div class="card" onclick="alert('Insufficient I/O Validation: Failing to validate input/output can lead to injection attacks.')">
+    <div class="card tooltip" onclick="alert('I/O Validation: Lack of proper checks can lead to exploits.')">
       <h3><span class="icon">⚠️</span>Insufficient I/O Validation</h3>
-    </div>
-    <div class="card" onclick="alert('Insecure Data Storage: Sensitive data stored insecurely on the device.')">
-      <h3><span class="icon">💾</span>Insecure Data Storage</h3>
-    </div>
-    <div class="card" onclick="alert('Security Misconfiguration: Poor configuration of app components or backend services.')">
-      <h3><span class="icon">⚙️</span>Security Misconfiguration</h3>
-    </div>
-    <div class="card" onclick="alert('Insufficient Privacy Controls: App collects or shares personal data without adequate protections.')">
-      <h3><span class="icon">👁️</span>Insufficient Privacy Controls</h3>
-    </div>
-    <div class="card" onclick="alert('Inadequate Code Obfuscation: Makes reverse engineering the app easier.')">
-      <h3><span class="icon">🧩</span>Inadequate Code Obfuscation</h3>
-    </div>
-    <div class="card" onclick="alert('Fraudulent Mobile Apps: Malicious apps imitating legitimate ones.')">
-      <h3><span class="icon">📱</span>Fraudulent Mobile Apps</h3>
-    </div>
+      <span class="tooltiptext">Failing to validate input/output can lead to injection attacks.</
+::contentReference[oaicite:8]{index=8}
   </div>
 
 </body>
