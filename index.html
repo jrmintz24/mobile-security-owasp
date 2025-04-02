@@ -3,9 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mobile Security & OWASP</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>OWASP Mobile Top 10</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #007bff;
+      --accent: #00d084;
+      --warning: #ff9900;
+      --light-bg: #f4f7fa;
+      --light-text: #222831;
+      --light-card: #ffffff;
+      --light-hover: #eaf6ff;
+      --dark-bg: #1c1c1e;
+      --dark-text: #f6f8fa;
+      --dark-card: #2a2a2a;
+      --dark-hover: #2e3a4e;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -13,20 +27,21 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f6f8fa;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-bg);
       background-image: url('background.png');
-      background-repeat: no-repeat;
       background-size: cover;
+      background-repeat: no-repeat;
       background-position: center;
-      color: #333;
+      color: var(--light-text);
       transition: background-color 0.3s, color 0.3s;
       min-height: 100vh;
+      padding-bottom: 80px;
     }
 
     body.dark-mode {
-      background-color: #1e1e1e;
-      color: #f6f8fa;
+      background-color: var(--dark-bg);
+      color: var(--dark-text);
     }
 
     header {
@@ -39,26 +54,6 @@
       margin-bottom: 0.5rem;
     }
 
-    .toggle-container {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-
-    .toggle-btn {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-
-    .toggle-btn:hover {
-      background-color: #0056b3;
-    }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -69,22 +64,27 @@
     }
 
     .card {
-      background: white;
+      background: var(--light-card);
       border-radius: 12px;
       padding: 1.5rem;
       box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
       position: relative;
       cursor: pointer;
     }
 
     body.dark-mode .card {
-      background-color: #2a2a2a;
+      background: var(--dark-card);
     }
 
     .card:hover {
+      background-color: var(--light-hover);
       transform: translateY(-5px);
       box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+    }
+
+    body.dark-mode .card:hover {
+      background-color: var(--dark-hover);
     }
 
     .card h3 {
@@ -107,7 +107,7 @@
     .tooltip .tooltiptext {
       visibility: hidden;
       width: 220px;
-      background-color: #555;
+      background-color: var(--warning);
       color: #fff;
       text-align: center;
       padding: 6px;
@@ -127,7 +127,7 @@
     }
 
     .faq-section {
-      max-width: 800px;
+      max-width: 900px;
       margin: 2rem auto;
       padding: 1rem;
     }
@@ -136,11 +136,15 @@
       border-bottom: 1px solid #ccc;
     }
 
+    body.dark-mode .faq-item {
+      border-color: #444;
+    }
+
     .faq-question {
       width: 100%;
       text-align: left;
       padding: 1rem;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       background: none;
       border: none;
       outline: none;
@@ -158,8 +162,21 @@
     }
 
     .faq-item.active .faq-answer {
-      max-height: 200px;
+      max-height: 300px;
       padding: 1rem;
+    }
+
+    .dark-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 999;
     }
 
     footer {
@@ -173,80 +190,103 @@
 <body>
 
   <header>
-    <h1>🛡️ Mobile Security & OWASP</h1>
-    <p>Top threats to mobile apps based on OWASP standards</p>
+    <h1>🛡️ OWASP Mobile Top 10</h1>
+    <p>Top mobile threats and how Zimperium helps defend against them</p>
   </header>
-
-  <div class="toggle-container">
-    <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
-  </div>
 
   <div class="grid">
     <div class="card tooltip" onclick="window.open('https://www.zimperium.com/products/zscan/', '_blank')">
       <h3><span class="icon">🔒</span>Improper Authentication</h3>
-      <span class="tooltiptext">zScan: Find and fix auth issues before release.</span>
+      <span class="tooltiptext">zScan: Detect auth flaws early.</span>
     </div>
-
     <div class="card tooltip" onclick="window.open('https://www.zimperium.com/products/zscan/', '_blank')">
       <h3><span class="icon">🧑‍⚖️</span>Insecure Authorization</h3>
-      <span class="tooltiptext">zScan: Enforce access controls in mobile apps.</span>
+      <span class="tooltiptext">zScan: Prevent privilege escalation.</span>
     </div>
-
     <div class="card tooltip" onclick="window.open('https://www.zimperium.com/products/zdefend/', '_blank')">
       <h3><span class="icon">📡</span>Insecure Communication</h3>
-      <span class="tooltiptext">zDefend: Secure data in transit on device.</span>
+      <span class="tooltiptext">zDefend: Secure on-device traffic.</span>
     </div>
-
     <div class="card tooltip" onclick="window.open('https://www.zimperium.com/products/zkeybox/', '_blank')">
       <h3><span class="icon">🔐</span>Inadequate Cryptography</h3>
-      <span class="tooltiptext">zKeyBox: Manage crypto keys the secure way.</span>
+      <span class="tooltiptext">zKeyBox: Proper key handling.</span>
     </div>
-
     <div class="card tooltip" onclick="window.open('https://www.zimperium.com/products/zscan/', '_blank')">
       <h3><span class="icon">⚠️</span>Insufficient I/O Validation</h3>
-      <span class="tooltiptext">zScan: Identify and prevent injection flaws.</span>
+      <span class="tooltiptext">zScan: Catch injection flaws.</span>
     </div>
-
     <div class="card tooltip" onclick="window.open('https://www.zimperium.com/products/zkeybox/', '_blank')">
       <h3><span class="icon">💾</span>Insecure Data Storage</h3>
-      <span class="tooltiptext">zKeyBox + zDefend: Lock down local data.</span>
+      <span class="tooltiptext">zKeyBox + zDefend: Secure sensitive data.</span>
     </div>
-
     <div class="card tooltip" onclick="window.open('https://www.zimperium.com/products/zscan/', '_blank')">
       <h3><span class="icon">⚙️</span>Security Misconfiguration</h3>
-      <span class="tooltiptext">zScan: Catch debug configs and insecure defaults.</span>
+      <span class="tooltiptext">zScan: Avoid debug configs & exposed APIs.</span>
     </div>
-
     <div class="card tooltip" onclick="window.open('https://www.zimperium.com/products/zdefend/', '_blank')">
       <h3><span class="icon">👁️</span>Insufficient Privacy Controls</h3>
-      <span class="tooltiptext">zDefend: Prevent privacy violations in real time.</span>
+      <span class="tooltiptext">zDefend: Monitor data handling in real-time.</span>
     </div>
-
     <div class="card tooltip" onclick="window.open('https://www.zimperium.com/products/zshield/', '_blank')">
       <h3><span class="icon">🧩</span>Inadequate Code Obfuscation</h3>
-      <span class="tooltiptext">zShield: Obfuscate and protect app logic.</span>
+      <span class="tooltiptext">zShield: Prevent reverse engineering.</span>
     </div>
-
     <div class="card tooltip" onclick="window.open('https://www.zimperium.com/products/zprotect/', '_blank')">
       <h3><span class="icon">📱</span>Fraudulent Mobile Apps</h3>
-      <span class="tooltiptext">zProtect: Detect fake or repackaged apps.</span>
+      <span class="tooltiptext">zProtect: Detect fake app clones.</span>
     </div>
   </div>
 
   <div class="faq-section">
+    <h2 style="text-align:center; margin-bottom: 1rem;">📚 Frequently Asked Questions</h2>
+
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFAQ(this)">What is OWASP?</button>
-      <div class="faq-answer">The Open Web Application Security Project (OWASP) is a nonprofit that provides unbiased information about computer security and publishes the "Top 10" risks for mobile and web apps.</div>
+      <div class="faq-answer">OWASP is a nonprofit that provides unbiased info about software security. The Mobile Top 10 lists the most critical mobile app threats.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-question" onclick="toggleFAQ(this)">What does Zimperium do?</button>
-      <div class="faq-answer">Zimperium provides mobile threat defense, runtime protection, static analysis, secure key management, and obfuscation solutions for app developers and enterprises.</div>
+      <button class="faq-question" onclick="toggleFAQ(this)">Why is mobile app security different?</button>
+      <div class="faq-answer">Mobile apps operate in untrusted, offline, user-controlled environments. They face risks like reverse engineering, app cloning, and insecure platforms.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">How is the OWASP Mobile Top 10 used?</button>
+      <div class="faq-answer">Think of it as a security checklist. You can test apps against it with tools like Zimperium zScan, and protect apps in runtime with zDefend.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">What's the difference between zScan and zDefend?</button>
+      <div class="faq-answer">zScan helps developers identify issues pre-release. zDefend runs in production, detecting live threats on end-user devices.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">What is mobile runtime protection?</button>
+      <div class="faq-answer">Also called RASP, it detects tampering, rooting, hooking, and more while the app is running. zDefend provides this capability.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">Can Zimperium tools be automated?</button>
+      <div class="faq-answer">Yes! You can plug zScan, zShield, and others into your CI/CD pipeline for full automated mobile app security testing and enforcement.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">What happens if my app is cloned or modified?</button>
+      <div class="faq-answer">Attackers can repackage or tamper with your app. zProtect helps detect this and block unauthorized apps in the wild.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">Does Zimperium support iOS and Android?</button>
+      <div class="faq-answer">Absolutely. Zimperium’s SDKs and scanning tools support both platforms — including native and cross-platform frameworks.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">Can Zimperium work alongside MDMs?</button>
+      <div class="faq-answer">Yes. Zimperium complements MDMs by embedding security into the app, useful in BYOD or unmanaged device scenarios.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">Is OWASP only for developers?</button>
+      <div class="faq-answer">Not at all. OWASP content is useful for architects, product owners, CISOs, pen testers, and anyone involved in secure mobile development.</div>
     </div>
   </div>
 
   <footer>
     Built with ❤️ by Randy & ChatGPT
   </footer>
+
+  <button class="dark-toggle" onclick="toggleDarkMode()">Dark Mode</button>
 
   <script>
     function toggleDarkMode() {
@@ -258,6 +298,5 @@
       item.classList.toggle("active");
     }
   </script>
-
 </body>
 </html>
