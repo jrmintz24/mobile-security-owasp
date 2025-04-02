@@ -6,22 +6,24 @@
   <title>Mobile Security & OWASP</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* General Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    /* Light Mode Styles */
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f6f8fa;
+      background-image: url('background.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
       color: #333;
       transition: background-color 0.3s, color 0.3s;
+      min-height: 100vh;
     }
 
-    /* Dark Mode Styles */
     body.dark-mode {
       background-color: #1e1e1e;
       color: #f6f8fa;
@@ -29,7 +31,7 @@
 
     header {
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2rem 1rem 1rem;
     }
 
     header h1 {
@@ -74,6 +76,10 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
       cursor: pointer;
+    }
+
+    body.dark-mode .card {
+      background-color: #2a2a2a;
     }
 
     .card:hover {
@@ -123,6 +129,7 @@
     .faq-section {
       max-width: 800px;
       margin: 2rem auto;
+      padding: 1rem;
     }
 
     .faq-item {
@@ -158,7 +165,7 @@
     footer {
       text-align: center;
       font-size: 0.9rem;
-      padding: 1rem;
+      padding: 2rem 1rem;
       color: #888;
     }
   </style>
@@ -193,8 +200,58 @@
     </div>
     <div class="card tooltip" onclick="alert('I/O Validation: Lack of proper checks can lead to exploits.')">
       <h3><span class="icon">⚠️</span>Insufficient I/O Validation</h3>
-      <span class="tooltiptext">Failing to validate input/output can lead to injection attacks.</
-::contentReference[oaicite:8]{index=8}
+      <span class="tooltiptext">Failure to validate input/output securely.</span>
+    </div>
+    <div class="card tooltip" onclick="alert('Insecure Data Storage: Sensitive data not stored securely.')">
+      <h3><span class="icon">💾</span>Insecure Data Storage</h3>
+      <span class="tooltiptext">Sensitive data left unprotected on the device.</span>
+    </div>
+    <div class="card tooltip" onclick="alert('Security Misconfiguration: Defaults or debug tools left enabled.')">
+      <h3><span class="icon">⚙️</span>Security Misconfiguration</h3>
+      <span class="tooltiptext">App components are misconfigured or exposed.</span>
+    </div>
+    <div class="card tooltip" onclick="alert('Privacy Controls: Failure to enforce user data protection.')">
+      <h3><span class="icon">👁️</span>Insufficient Privacy Controls</h3>
+      <span class="tooltiptext">Collecting or sharing user data improperly.</span>
+    </div>
+    <div class="card tooltip" onclick="alert('Code Obfuscation: App logic is easy to reverse-engineer.')">
+      <h3><span class="icon">🧩</span>Inadequate Code Obfuscation</h3>
+      <span class="tooltiptext">App logic is not protected against analysis.</span>
+    </div>
+    <div class="card tooltip" onclick="alert('Fraudulent Apps: Fake versions impersonating your app.')">
+      <h3><span class="icon">📱</span>Fraudulent Mobile Apps</h3>
+      <span class="tooltiptext">Malicious apps pretending to be legitimate.</span>
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">What is OWASP?</button>
+      <div class="faq-answer">The Open Web Application Security Project (OWASP) is a nonprofit foundation that works to improve software security. They publish the top 10 most critical mobile and web security risks.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">Why focus on mobile app security?</button>
+      <div class="faq-answer">Mobile apps are widely used for sensitive tasks — banking, messaging, healthcare — and are often exposed to unique risks due to platform limitations and user behavior.</div>
+    </div>
+  </div>
+
+  <footer>
+    Built with ❤️ by Randy & ChatGPT
+  </footer>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function toggleFAQ(button) {
+      const item = button.parentElement;
+      item.classList.toggle("active");
+    }
+  </script>
+
+</body>
+</html>
   </div>
 
 </body>
