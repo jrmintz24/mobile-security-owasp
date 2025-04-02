@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Security & OWASP</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fefefe;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      max-width: 1000px;
+      width: 100%;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    .icon {
+      font-size: 1.8rem;
+      margin-right: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛡️ Mobile Security & OWASP</h1>
+  <div class="grid">
+    <div class="card" onclick="alert('Improper Authentication: Risk of weak or missing authentication mechanisms.')">
+      <h3><span class="icon">🔒</span>Improper Authentication</h3>
+    </div>
+    <div class="card" onclick="alert('Insecure Authorization: Poor enforcement of access control policies.')">
+      <h3><span class="icon">🧑‍⚖️</span>Insecure Authorization</h3>
+    </div>
+    <div class="card" onclick="alert('Insecure Communication: Data is not properly encrypted or secured during transmission.')">
+      <h3><span class="icon">📡</span>Insecure Communication</h3>
+    </div>
+    <div class="card" onclick="alert('Inadequate Cryptography: Weak or misused cryptographic implementations.')">
+      <h3><span class="icon">🔐</span>Inadequate Cryptography</h3>
+    </div>
+    <div class="card" onclick="alert('Insufficient I/O Validation: Failing to validate input/output can lead to injection attacks.')">
+      <h3><span class="icon">⚠️</span>Insufficient I/O Validation</h3>
+    </div>
+    <div class="card" onclick="alert('Insecure Data Storage: Sensitive data stored insecurely on the device.')">
+      <h3><span class="icon">💾</span>Insecure Data Storage</h3>
+    </div>
+    <div class="card" onclick="alert('Security Misconfiguration: Poor configuration of app components or backend services.')">
+      <h3><span class="icon">⚙️</span>Security Misconfiguration</h3>
+    </div>
+    <div class="card" onclick="alert('Insufficient Privacy Controls: App collects or shares personal data without adequate protections.')">
+      <h3><span class="icon">👁️</span>Insufficient Privacy Controls</h3>
+    </div>
+    <div class="card" onclick="alert('Inadequate Code Obfuscation: Makes reverse engineering the app easier.')">
+      <h3><span class="icon">🧩</span>Inadequate Code Obfuscation</h3>
+    </div>
+    <div class="card" onclick="alert('Fraudulent Mobile Apps: Malicious apps imitating legitimate ones.')">
+      <h3><span class="icon">📱</span>Fraudulent Mobile Apps</h3>
+    </div>
+  </div>
+
+</body>
+</html>
