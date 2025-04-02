@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MITRE ATT&CK Mobile: MDM vs MTD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #007bff;
+      --accent: #00d084;
+      --warning: #ff9900;
+      --light-bg: #f4f7fa;
+      --light-text: #222831;
+      --light-card: #ffffff;
+      --light-hover: #eaf6ff;
+      --dark-bg: #1c1c1e;
+      --dark-text: #f6f8fa;
+      --dark-card: #2a2a2a;
+      --dark-hover: #2e3a4e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--light-text);
+      padding-bottom: 80px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    header h1 {
+      font-size: 2.3rem;
+    }
+
+    header p {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      color: var(--primary);
+    }
+
+    .table-container {
+      overflow-x: auto;
+      padding: 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      text-align: center;
+      position: relative;
+    }
+
+    body.dark-mode th, body.dark-mode td {
+      border-color: #444;
+    }
+
+    th {
+      background-color: var(--primary);
+      color: white;
+      font-size: 0.95rem;
+    }
+
+    td {
+      background-color: var(--light-card);
+      transition: background-color 0.3s;
+    }
+
+    body.dark-mode td {
+      background-color: var(--dark-card);
+    }
+
+    .mdm {
+      background-color: #ffeecc;
+    }
+
+    .mtd {
+      background-color: #caffd0;
+    }
+
+    .both {
+      background-color: #bbdefb;
+    }
+
+    .tooltip {
+      position: relative;
+      cursor: help;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: var(--warning);
+      color: white;
+      text-align: center;
+      border-radius: 6px;
+      padding: 6px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -100px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .dark-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 2rem 1rem;
+      color: #888;
+    }
+
+    a.back-link {
+      display: inline-block;
+      text-align: center;
+      margin: 1rem auto;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    a.back-link:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>MITRE ATT&CK Mobile: MDM vs MTD Coverage</h1>
+    <p>Explore how Zimperium's MTD stacks up against MDM across mobile threat tactics</p>
+  </header>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Tactic</th>
+        <th>MDM Coverage</th>
+        <th>MTD (Zimperium) Coverage</th>
+      </tr>
+      <tr>
+        <td>Initial Access</td>
+        <td class="tooltip">❌<span class="tooltiptext">MDM does not detect phishing or malicious app installs</span></td>
+        <td class="mtd tooltip">✅<span class="tooltiptext">MTD detects phishing, sideloading, malicious APKs</span></td>
+      </tr>
+      <tr>
+        <td>Execution</td>
+        <td class="tooltip">❌<span class="tooltiptext">MDM does not monitor app execution</span></td>
+        <td class="mtd tooltip">✅<span class="tooltiptext">MTD monitors app behavior and code execution</span></td>
+      </tr>
+      <tr>
+        <td>Persistence</td>
+        <td class="tooltip">⚠️<span class="tooltiptext">MDM can enforce some policies to reduce persistence</span></td>
+        <td class="both tooltip">✅<span class="tooltiptext">MTD detects techniques to persist across reboots</span></td>
+      </tr>
+      <tr>
+        <td>Privilege Escalation</td>
+        <td class="tooltip">❌<span class="tooltiptext">MDM rarely detects rooting/jailbreak attempts</span></td>
+        <td class="mtd tooltip">✅<span class="tooltiptext">MTD detects root, jailbreak, exploit attempts</span></td>
+      </tr>
+      <tr>
+        <td>Defense Evasion</td>
+        <td class="tooltip">❌<span class="tooltiptext">MDM does not track obfuscation or evasion tools</span></td>
+        <td class="mtd tooltip">✅<span class="tooltiptext">MTD detects hiding techniques, magisk, etc.</span></td>
+      </tr>
+      <tr>
+        <td>Credential Access</td>
+        <td class="tooltip">❌<span class="tooltiptext">MDM does not monitor clipboard or keylogging</span></td>
+        <td class="mtd tooltip">✅<span class="tooltiptext">MTD identifies credential phishing apps</span></td>
+      </tr>
+      <tr>
+        <td>Discovery</td>
+        <td class="tooltip">✅<span class="tooltiptext">MDM can query installed apps and OS version</span></td>
+        <td class="both tooltip">✅<span class="tooltiptext">MTD maps system, network, app discovery tactics</span></td>
+      </tr>
+      <tr>
+        <td>Collection</td>
+        <td class="tooltip">❌<span class="tooltiptext">MDM cannot detect screen capture, camera, mic misuse</span></td>
+        <td class="mtd tooltip">✅<span class="tooltiptext">MTD detects data exfiltration through sensors</span></td>
+      </tr>
+      <tr>
+        <td>Exfiltration</td>
+        <td class="tooltip">❌<span class="tooltiptext">MDM does not inspect outbound data flows</span></td>
+        <td class="mtd tooltip">✅<span class="tooltiptext">MTD inspects data exfiltration techniques</span></td>
+      </tr>
+      <tr>
+        <td>Command & Control</td>
+        <td class="tooltip">❌<span class="tooltiptext">MDM cannot detect malicious C2 connections</span></td>
+        <td class="mtd tooltip">✅<span class="tooltiptext">MTD detects C2 behavior and network traffic anomalies</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div style="text-align: center; margin-top: 2rem;">
+    <a class="back-link" href="index.html">← Back to OWASP Top 10</a>
+  </div>
+
+  <footer>
+    Built with ❤️ by Randy & ChatGPT
+  </footer>
+
+  <button class="dark-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
+</body>
+</html>
