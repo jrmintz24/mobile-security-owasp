@@ -12,14 +12,31 @@
       background: linear-gradient(135deg, #3a0ca3, #4361ee);
       color: white;
       margin: 0;
-      padding: 2rem 1rem 5rem;
+      padding: 0;
     }
-    .dark-mode {
-      background: linear-gradient(135deg, #0b0c2a, #1e1e3f);
+    nav {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #00d084;
     }
     header {
       text-align: center;
-      margin-bottom: 2rem;
+      margin: 2rem 1rem;
     }
     header h1 {
       font-size: 2.2rem;
@@ -90,6 +107,12 @@
   </style>
 </head>
 <body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="mitre-mapping.html">MITRE Mapping</a>
+    <a href="blog.html">Blog</a>
+  </nav>
 
   <header>
     <h1>📚 The Sales Guy’s Guide to Mobile Security</h1>
